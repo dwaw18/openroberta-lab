@@ -62,6 +62,7 @@ require.config({
         'socket.controller': 'app/roberta/controller/socket.controller',
         'webview.controller': 'app/roberta/controller/webview.controller',
         'sourceCodeEditor.controller': 'app/roberta/controller/sourceCodeEditor.controller',
+        'orb.model' : '../app/roberta/models/orb.model',
 
         'simulation.constants': 'app/simulation/simulationLogic/constants',
         'simulation.math': 'app/simulation/simulationLogic/math',
@@ -92,6 +93,17 @@ require.config({
         'interpreter.interpreter': 'app/nepostackmachine/interpreter.interpreter',
         'interpreter.aRobotBehaviour': 'app/nepostackmachine/interpreter.aRobotBehaviour',
         'interpreter.robotWeDoBehaviour': 'app/nepostackmachine/interpreter.robotWeDoBehaviour',
+        'interpreter.robotOrbBehaviour' : '../app/nepostackmachine/interpreter.robotOrbBehaviour',
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+        'interpreter.robotOrbBehaviour' : 'app/nepostackmachine/interpreter.robotOrbBehaviour',
+=======
+>>>>>>> f00daab74...  issue WIP - integrate ORB
+=======
+
+        'interpreter.robotOrbBehaviour' : 'app/nepostackmachine/interpreter.robotOrbBehaviour',
+>>>>>>> b8d4d5ef3... fix rebase error
         'interpreter.robotSimBehaviour': 'app/nepostackmachine/interpreter.robotSimBehaviour',
         'interpreter.state': 'app/nepostackmachine/interpreter.state',
         'interpreter.util': 'app/nepostackmachine/interpreter.util',

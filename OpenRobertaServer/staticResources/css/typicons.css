@@ -59,6 +59,10 @@
   content: "\e907";
 }
 .typcn-edison:before {
+.typcn-orb:before {
+  content: "\e907";
+}
+.typcn-open:before {
   content: "\e908";
 }
 .typcn-bob3:before {
