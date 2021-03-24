@@ -298,8 +298,9 @@ public final class UnitTestHelper {
             DiffBuilder
                 .compare(expected)
                 .withTest(transformed)
-                .withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byName))
+                .withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byNameAndText))
                 .ignoreWhitespace()
+                .normalizeWhitespace()
                 .ignoreElementContentWhitespace()
                 .ignoreComments()
                 .checkForSimilar()
@@ -310,5 +311,4 @@ public final class UnitTestHelper {
             return null;
         }
     }
-
 }

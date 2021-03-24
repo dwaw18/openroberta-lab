@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import com.google.common.collect.ClassToInstanceMap;
 
-import de.fhg.iais.roberta.ast.AstTest;
+import de.fhg.iais.roberta.AstTest;
 import de.fhg.iais.roberta.bean.IProjectBean;
 import de.fhg.iais.roberta.components.ConfigurationAst;
 import de.fhg.iais.roberta.components.Project;

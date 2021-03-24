@@ -22,7 +22,7 @@ import java.util.Collections;
 
 import lejos.remote.nxt.NXTConnection;
 
-public class null {
+public class NEPOprog {
     private static Configuration brickConfiguration;
     
     private Set<UsedSensor> usedSensors = new LinkedHashSet<UsedSensor>();
@@ -37,7 +37,7 @@ public class null {
                 .addActor(ActorPort.C, new Actor(ActorType.LARGE, true, DriveDirection.FOREWARD, MotorSide.LEFT))
                 .build();
             
-            new null().run();
+            new NEPOprog().run();
         } catch ( Exception e ) {
             Hal.displayExceptionWaitForKeyPress(e);
         }

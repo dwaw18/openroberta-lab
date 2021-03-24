@@ -23,5 +23,5 @@ SensorStmt TimerSensor [3, RESET, NO_SLOT]WaitStmt [
 )]WaitStmt [
 (repeat [WAIT, Binary [EQ, SensorExpr [GetSampleSensor [TouchSensor [1, PRESSED, EMPTY_SLOT]]], BoolConst [false]]]
 )]
-AktionStmt [ClearDisplayAction []]
+AktionStmt [ClearDisplayAction[port: NO_PORT]]
 )

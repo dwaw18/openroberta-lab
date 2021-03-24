@@ -2,7 +2,7 @@ MotorOnAction [M, MotionParam [speed=NumConst [30], duration=MotorDuration [type
 MotorOnAction [M, MotionParam [speed=NumConst [30], duration=null]]
 WaitTimeStmt [time=NumConst [500]]
 MotorStop [port=M]
-ClearDisplayAction []
+ClearDisplayAction[port: NO_PORT]
 PlayNoteAction [ duration=2000, frequency=261.626]
 ToneAction [NumConst [300], NumConst [100]]
 LightAction [LED, DEFAULT, DEFAULT, ColorConst [#ff0000]]

@@ -1,4 +1,4 @@
-#define PROGRAM_NAME "null"
+#define PROGRAM_NAME "NEPOprog"
 #define WHEEL_DIAMETER 5.6
 #define TRACK_WIDTH 18.0
 

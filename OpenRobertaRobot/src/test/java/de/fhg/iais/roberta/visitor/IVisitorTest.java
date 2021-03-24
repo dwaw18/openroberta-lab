@@ -20,14 +20,14 @@ public class IVisitorTest {
     }
 
     @Test
-    public void callsMethod() {
+    public void callsMethodTest() {
         Sensor sensor = new Sensor();
         visitor.visit(sensor);
         verify(visitor, times(1)).visitSensor(sensor);
     }
 
     @Test
-    public void throwsWhenMethodPrivate() {
+    public void throwsWhenMethodPrivateTest() {
         OtherSensor otherSensor = new OtherSensor();
         Assertions.assertThatThrownBy(() -> visitor.visit(otherSensor))
             .isInstanceOf(DbcException.class)
@@ -37,7 +37,7 @@ public class IVisitorTest {
     }
 
     @Test
-    public void throwsWhenMessageNotThere() {
+    public void throwsWhenMessageNotThereTest() {
         Actor actor = new Actor();
         Assertions.assertThatThrownBy(() -> visitor.visit(actor))
             .isInstanceOf(DbcException.class)
@@ -47,7 +47,7 @@ public class IVisitorTest {
     }
 
     @Test
-    public void passesThroughException() {
+    public void passesThroughExceptionTest() {
         Sensor sensor = new Sensor();
         DbcException exception = new DbcException("unsupported Configuration");
         doThrow(exception).when(visitor).visitSensor(sensor);

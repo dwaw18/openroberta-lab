@@ -22,7 +22,7 @@ import java.util.Collections;
 
 import lejos.remote.nxt.NXTConnection;
 
-public class null {
+public class NEPOprog {
     private static Configuration brickConfiguration;
     
     private Set<UsedSensor> usedSensors = new LinkedHashSet<UsedSensor>(Arrays.asList(new UsedSensor(SensorPort.S4, SensorType.INFRARED, InfraredSensorMode.DISTANCE), new UsedSensor(SensorPort.S4, SensorType.INFRARED, InfraredSensorMode.SEEK), new UsedSensor(SensorPort.S1, SensorType.IRSEEKER, IRSeekerSensorMode.MODULATED), new UsedSensor(SensorPort.S1, SensorType.IRSEEKER, IRSeekerSensorMode.UNMODULATED)));
@@ -38,7 +38,7 @@ public class null {
                 .addSensor(SensorPort.S4, new Sensor(SensorType.INFRARED))
                 .build();
             
-            new null().run();
+            new NEPOprog().run();
         } catch ( Exception e ) {
             Hal.displayExceptionWaitForKeyPress(e);
         }
