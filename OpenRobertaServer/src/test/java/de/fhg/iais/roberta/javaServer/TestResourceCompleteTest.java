@@ -52,19 +52,24 @@ public class TestResourceCompleteTest {
             .collect(Collectors.toSet());
     }
 
-    @Parameterized.Parameters(name = "{index}: {0} - {1} toolbox, block=\"{2}\"")
+    @Parameterized.Parameters(name = "{0} - {1} toolbox, block=\"{2}\"")
     public static Collection<Object[]> data() {
         return robots.keySet().stream()
             .map(robot -> Util.configureRobotPlugin(robot, "", "", new ArrayList<>()))
             .flatMap(robotFactory -> Stream.of(generateTestDataForRobotFactory(robotFactory, true), generateTestDataForRobotFactory(robotFactory, false)))
             .flatMap(Collection::stream)
+            .map(Arrays::asList)
+            .collect(Collectors.toSet())
+            .stream()
+            .map(list -> new String[]{list.get(0), list.get(1), list.get(2)})
+            .sorted(Comparator.comparing(s -> s[0]))
             .collect(Collectors.toList());
     }
 
     private static Collection<String[]> generateTestDataForRobotFactory(IRobotFactory robotFactory, boolean beginner) {
         Set<String> blocks = parseBlockTypes(beginner ? robotFactory.getProgramToolboxBeginner() : robotFactory.getProgramToolboxExpert());
 
-        String robotName = robotFactory.getRealName();
+        String robotName = robotFactory.getGroup();
         String toolbox = beginner ? "beginner" : "expert";
         return blocks.stream()
             .map(blockType -> new String[] {robotName, toolbox, blockType})
