@@ -94,16 +94,8 @@ require.config({
         'interpreter.aRobotBehaviour': 'app/nepostackmachine/interpreter.aRobotBehaviour',
         'interpreter.robotWeDoBehaviour': 'app/nepostackmachine/interpreter.robotWeDoBehaviour',
         'interpreter.robotOrbBehaviour' : '../app/nepostackmachine/interpreter.robotOrbBehaviour',
-<<<<<<< HEAD
-<<<<<<< HEAD
-
+        
         'interpreter.robotOrbBehaviour' : 'app/nepostackmachine/interpreter.robotOrbBehaviour',
-=======
->>>>>>> f00daab74...  issue WIP - integrate ORB
-=======
-
-        'interpreter.robotOrbBehaviour' : 'app/nepostackmachine/interpreter.robotOrbBehaviour',
->>>>>>> b8d4d5ef3... fix rebase error
         'interpreter.robotSimBehaviour': 'app/nepostackmachine/interpreter.robotSimBehaviour',
         'interpreter.state': 'app/nepostackmachine/interpreter.state',
         'interpreter.util': 'app/nepostackmachine/interpreter.util',

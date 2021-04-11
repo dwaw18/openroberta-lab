@@ -114,13 +114,6 @@
 		<block type="robSensors_gyro_getSample" />
 		<block type="robSensors_timer_getSample" />
 		<block type="robSensors_timer_reset" />
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-		<block type="robSensors_compass_getSample" />
->>>>>>> f00daab74...  issue WIP - integrate ORB
-=======
->>>>>>> 2e65f40f1... add new sensors, color change
 	</category>
 	<category name="TOOLBOX_CONTROL" svg="true">
 		<block type="robControls_if" />
@@ -179,10 +172,6 @@
 	</category>
 	<category name="TOOLBOX_COLOUR" svg="true">
 		<block type="robColour_picker">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 2e65f40f1... add new sensors, color change
             <field name="COLOUR">#585858</field>
         </block>
         <block type="robColour_picker">
@@ -206,40 +195,6 @@
         <block type="robColour_picker">
             <field name="COLOUR">#532115</field>
         </block>
-<<<<<<< HEAD
-=======
-			<field name="COLOUR">#FF1493</field>
-		</block>
-		<block type="robColour_picker">
-			<field name="COLOUR">#800080</field>
-		</block>
-		<block type="robColour_picker">
-			<field name="COLOUR">#4876FF</field>
-		</block>
-		<block type="robColour_picker">
-			<field name="COLOUR">#00FFFF</field>
-		</block>
-		<block type="robColour_picker">
-			<field name="COLOUR">#90EE90</field>
-		</block>
-		<block type="robColour_picker">
-			<field name="COLOUR">#008000</field>
-		</block>
-		<block type="robColour_picker">
-			<field name="COLOUR">#FFFF00</field>
-		</block>
-		<block type="robColour_picker">
-			<field name="COLOUR">#FFA500</field>
-		</block>
-		<block type="robColour_picker">
-			<field name="COLOUR">#FF0000</field>
-		</block>
-		<block type="robColour_picker">
-			<field name="COLOUR">#FFFFFE</field>
-		</block>
->>>>>>> f00daab74...  issue WIP - integrate ORB
-=======
->>>>>>> 2e65f40f1... add new sensors, color change
 	</category>
 	<category name="TOOLBOX_VARIABLE" custom="VARIABLE" svg="true" />
 </toolbox_set>

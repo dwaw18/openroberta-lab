@@ -1,14 +1,6 @@
 define(['exports', 'guiState.controller', 'interpreter.interpreter', 'interpreter.robotWeDoBehaviour', 'interpreter.robotOrbBehaviour', 'log', 'blockly', 'jquery'], function(exports,
     GUISTATE_C, INTERPRETER, WEDO_B, ORB_R, LOG, Blockly, $) {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-/*define( ['exports', 'guiState.controller', 'interpreter.interpreter', 'interpreter.robotWeDoBehaviour', 'interpreter.robotOrbBehaviour', 'util', 'log', 'message', 'blockly', 'jquery'], function( exports,
-    GUISTATE_C, WEDO_I, WEDO_R, ORB_R, UTIL, LOG, MSG, Blockly, $ ) {*/
->>>>>>> f00daab74...  issue WIP - integrate ORB
-=======
->>>>>>> c938939f4... Bug fixing (rebase), adjustment of OrbBehaviours
 
     var ready;
     var aLanguage;
@@ -178,17 +170,12 @@ define(['exports', 'guiState.controller', 'interpreter.interpreter', 'interprete
         }
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
     function getOrbInterpreter( program ) {
         interpreter = new WEDO_I.Interpreter( program, orb, callbackOnTermination );
         return interpreter;
     }
     exports.getOrbInterpreter = getOrbInterpreter;
->>>>>>> f00daab74...  issue WIP - integrate ORB
-=======
->>>>>>> c938939f4... Bug fixing (rebase), adjustment of OrbBehaviours
 
     function getWeDo() {
         return wedo;
