@@ -48,7 +48,7 @@ public class OrbStackMachineVisitor<V> extends AbstractStackMachineVisitor<V> im
         //String port = motorGetPowerAction.getUserDefinedPort();
         ConfigurationComponent confMotorBlock = getConfigurationComponent(motorGetPowerAction.getUserDefinedPort());
         String port = confMotorBlock.getProperty("CONNECTOR");
-        JSONObject o = mk(C.MOTOR_GET_POWER).put(C.PORT, port.toLowerCase());
+        JSONObject o = makeNode(C.MOTOR_GET_POWER).put(C.PORT, port.toLowerCase());
         return app(o);
     }
 
@@ -64,12 +64,12 @@ public class OrbStackMachineVisitor<V> extends AbstractStackMachineVisitor<V> im
         if ( leftMotorRotationDirection != DriveDirection.FOREWARD ) {
             driveDirection = getDriveDirection(driveAction.getDirection() == DriveDirection.FOREWARD);
         }
-        JSONObject o = mk(C.DRIVE_ACTION).put(C.DRIVE_DIRECTION, driveDirection).put(C.NAME, brickName).put(C.SPEED_ONLY, speedOnly);
+        JSONObject o = makeNode(C.DRIVE_ACTION).put(C.DRIVE_DIRECTION, driveDirection).put(C.NAME, brickName).put(C.SPEED_ONLY, speedOnly);
         if ( speedOnly ) {
             return app(o);
         } else {
             app(o);
-            return app(mk(C.STOP_DRIVE).put(C.NAME, brickName));
+            return app(makeNode(C.STOP_DRIVE).put(C.NAME, brickName));
         }
     }
 
@@ -83,12 +83,12 @@ public class OrbStackMachineVisitor<V> extends AbstractStackMachineVisitor<V> im
             motorOnAction.getParam().getSpeed().accept(this);
             MotorDuration<V> duration = motorOnAction.getParam().getDuration();
             boolean speedOnly = !processOptionalDuration(duration);
-            JSONObject o = mk(C.MOTOR_ON_ACTION).put(C.NAME, brickName).put(C.PORT, port).put(C.SPEED_ONLY, speedOnly).put(C.SPEED_ONLY, speedOnly);
+            JSONObject o = makeNode(C.MOTOR_ON_ACTION).put(C.NAME, brickName).put(C.PORT, port).put(C.SPEED_ONLY, speedOnly).put(C.SPEED_ONLY, speedOnly);
             if ( speedOnly ) {
                 return app(o);
             } else {
                 app(o);
-                return app(mk(C.MOTOR_STOP).put(C.NAME, brickName).put(C.PORT, port));
+                return app(makeNode(C.MOTOR_STOP).put(C.NAME, brickName).put(C.PORT, port));
             }
         } else {
             throw new DbcException("No robot name or no port");
@@ -101,7 +101,7 @@ public class OrbStackMachineVisitor<V> extends AbstractStackMachineVisitor<V> im
         ConfigurationComponent confMotorBlock = getConfigurationComponent(motorSetPowerAction.getUserDefinedPort());
         String port = confMotorBlock.getProperty("CONNECTOR");
         motorSetPowerAction.getPower().accept(this);
-        JSONObject o = mk(C.MOTOR_SET_POWER).put(C.PORT, port.toLowerCase());
+        JSONObject o = makeNode(C.MOTOR_SET_POWER).put(C.PORT, port.toLowerCase());
         return app(o);
     }
 
@@ -111,7 +111,7 @@ public class OrbStackMachineVisitor<V> extends AbstractStackMachineVisitor<V> im
         String brickName = confMotorBlock.getProperty("VAR");
         String port = confMotorBlock.getProperty("CONNECTOR");
         if ( brickName != null && port != null ) {
-            JSONObject o = mk(C.MOTOR_STOP).put(C.NAME, brickName).put(C.PORT, port);
+            JSONObject o = makeNode(C.MOTOR_STOP).put(C.NAME, brickName).put(C.PORT, port);
             return app(o);
         } else {
             throw new DbcException("No robot name or no port");
@@ -129,12 +129,12 @@ public class OrbStackMachineVisitor<V> extends AbstractStackMachineVisitor<V> im
         if ( leftMotorRotationDirection != DriveDirection.FOREWARD ) {
             turnDirection = getTurnDirection(turnAction.getDirection() == TurnDirection.LEFT);
         }*/
-        JSONObject o = mk(C.TURN_ACTION).put(C.TURN_DIRECTION, turnDirection.toString().toLowerCase()).put(C.NAME, "orb").put(C.SPEED_ONLY, speedOnly);
+        JSONObject o = makeNode(C.TURN_ACTION).put(C.TURN_DIRECTION, turnDirection.toString().toLowerCase()).put(C.NAME, "orb").put(C.SPEED_ONLY, speedOnly);
         if ( speedOnly ) {
             return app(o);
         } else {
             app(o);
-            return app(mk(C.STOP_DRIVE).put(C.NAME, "orb"));
+            return app(makeNode(C.STOP_DRIVE).put(C.NAME, "orb"));
         }
     }
 
@@ -150,25 +150,25 @@ public class OrbStackMachineVisitor<V> extends AbstractStackMachineVisitor<V> im
         if ( leftMotorRotationDirection != DriveDirection.FOREWARD ) {
             driveDirection = getDriveDirection(curveAction.getDirection() == DriveDirection.FOREWARD);
         }*/
-        JSONObject o = mk(C.CURVE_ACTION).put(C.DRIVE_DIRECTION, driveDirection).put(C.NAME, "orb").put(C.SPEED_ONLY, speedOnly);
+        JSONObject o = makeNode(C.CURVE_ACTION).put(C.DRIVE_DIRECTION, driveDirection).put(C.NAME, "orb").put(C.SPEED_ONLY, speedOnly);
         if ( speedOnly ) {
             return app(o);
         } else {
             app(o);
-            return app(mk(C.STOP_DRIVE).put(C.NAME, "orb"));
+            return app(makeNode(C.STOP_DRIVE).put(C.NAME, "orb"));
         }
     }
 
     @Override
     public V visitClearDisplayAction(ClearDisplayAction<V> clearDisplayAction) {
-        JSONObject o = mk(C.CLEAR_DISPLAY_ACTION);
+        JSONObject o = makeNode(C.CLEAR_DISPLAY_ACTION);
         return app(o);
     }
 
     @Override
     public V visitShowTextAction(ShowTextAction<V> showTextAction) {
         showTextAction.getMsg().accept(this);
-        JSONObject o = mk(C.SHOW_TEXT_ACTION);
+        JSONObject o = makeNode(C.SHOW_TEXT_ACTION);
         return app(o);
     }
 
@@ -177,7 +177,7 @@ public class OrbStackMachineVisitor<V> extends AbstractStackMachineVisitor<V> im
     public V visitCompassSensor(CompassSensor<V> compassSensor) {
         // TODO check if this is really supported!
         String mode = compassSensor.getMode();
-        JSONObject o = mk(C.GET_SAMPLE).put(C.GET_SAMPLE, C.COMPASS).put(C.MODE, mode.toLowerCase()).put(C.NAME, "orb");
+        JSONObject o = makeNode(C.GET_SAMPLE).put(C.GET_SAMPLE, C.COMPASS).put(C.MODE, mode.toLowerCase()).put(C.NAME, "orb");
         return app(o);
     }*/
 
@@ -185,7 +185,7 @@ public class OrbStackMachineVisitor<V> extends AbstractStackMachineVisitor<V> im
     public V visitTouchSensor(TouchSensor<V> touchSensor) {
         ConfigurationComponent confSensor = getConfigurationComponent(touchSensor.getPort());
         String port = confSensor.getProperty("CONNECTOR");
-        JSONObject o = mk(C.GET_SAMPLE).put(C.GET_SAMPLE, C.TOUCH).put(C.PORT, port).put(C.NAME, "orb");
+        JSONObject o = makeNode(C.GET_SAMPLE).put(C.GET_SAMPLE, C.TOUCH).put(C.PORT, port).put(C.NAME, "orb");
         return app(o);
     }
 
@@ -194,7 +194,7 @@ public class OrbStackMachineVisitor<V> extends AbstractStackMachineVisitor<V> im
         ConfigurationComponent confSensor = getConfigurationComponent(colorSensor.getPort());
         String mode = colorSensor.getMode();
         String port = confSensor.getProperty("CONNECTOR");
-        JSONObject o = mk(C.GET_SAMPLE).put(C.GET_SAMPLE, C.COLOR).put(C.PORT, port).put(C.MODE, mode.toLowerCase()).put(C.NAME, "orb");
+        JSONObject o = makeNode(C.GET_SAMPLE).put(C.GET_SAMPLE, C.COLOR).put(C.PORT, port).put(C.MODE, mode.toLowerCase()).put(C.NAME, "orb");
         return app(o);
     }
 
@@ -203,7 +203,7 @@ public class OrbStackMachineVisitor<V> extends AbstractStackMachineVisitor<V> im
         ConfigurationComponent confSensor = getConfigurationComponent(ultrasonicSensor.getPort());
         String mode = ultrasonicSensor.getMode();
         String port = confSensor.getProperty("CONNECTOR");
-        JSONObject o = mk(C.GET_SAMPLE).put(C.GET_SAMPLE, C.ULTRASONIC).put(C.PORT, port).put(C.MODE, mode.toLowerCase()).put(C.NAME, "orb");//war ev3, hab geändert
+        JSONObject o = makeNode(C.GET_SAMPLE).put(C.GET_SAMPLE, C.ULTRASONIC).put(C.PORT, port).put(C.MODE, mode.toLowerCase()).put(C.NAME, "orb");//war ev3, hab geändert
         return app(o);
     }
 
@@ -213,7 +213,7 @@ public class OrbStackMachineVisitor<V> extends AbstractStackMachineVisitor<V> im
         String mode = gyroSensor.getMode();
         String port = confGyroSensor.getProperty("CONNECTOR");
         String slot = gyroSensor.getSlot().toString(); // the mode is in the slot?
-        JSONObject o = mk(C.GET_SAMPLE).put(C.GET_SAMPLE, C.GYRO).put(C.PORT, port).put(C.MODE, mode.toLowerCase()).put(C.NAME, "orb");//war ev3, hab geändert
+        JSONObject o = makeNode(C.GET_SAMPLE).put(C.GET_SAMPLE, C.GYRO).put(C.PORT, port).put(C.MODE, mode.toLowerCase()).put(C.NAME, "orb");//war ev3, hab geändert
         return app(o);
     }
 
@@ -225,7 +225,7 @@ public class OrbStackMachineVisitor<V> extends AbstractStackMachineVisitor<V> im
         String port = confGyroSensor.getProperty("CONNECTOR");
         String slot = gyroSensor.getSlot().toString(); // the mode is in the slot?
         if ( brickName != null && port != null ) {
-            JSONObject o = mk(C.GET_SAMPLE).put(C.GET_SAMPLE, C.GYRO).put(C.NAME, brickName).put(C.PORT, port).put(C.MODE, slot);
+            JSONObject o = makeNode(C.GET_SAMPLE).put(C.GET_SAMPLE, C.GYRO).put(C.NAME, brickName).put(C.PORT, port).put(C.MODE, slot);
             return app(o);
         } else {
             throw new DbcException("operation not supported");
@@ -239,10 +239,10 @@ public class OrbStackMachineVisitor<V> extends AbstractStackMachineVisitor<V> im
         switch ( timerSensor.getMode() ) {
             case "DEFAULT":
             case "VALUE":
-                o = mk(C.GET_SAMPLE).put(C.GET_SAMPLE, C.TIMER).put(C.PORT, timerSensor.getPort());
+                o = makeNode(C.GET_SAMPLE).put(C.GET_SAMPLE, C.TIMER).put(C.PORT, timerSensor.getPort());
                 break;
             case "RESET":
-                o = mk(C.TIMER_SENSOR_RESET).put(C.PORT, timerSensor.getPort());
+                o = makeNode(C.TIMER_SENSOR_RESET).put(C.PORT, timerSensor.getPort());
                 break;
             default:
                 throw new DbcException("Invalid Timer Mode " + timerSensor.getMode());
@@ -255,7 +255,7 @@ public class OrbStackMachineVisitor<V> extends AbstractStackMachineVisitor<V> im
         ConfigurationComponent confSensor = getConfigurationComponent(infraredSensor.getPort());
         String mode = infraredSensor.getMode();
         String port = confSensor.getProperty("CONNECTOR");
-        JSONObject o = mk(C.GET_SAMPLE).put(C.GET_SAMPLE, C.INFRARED).put(C.PORT, port).put(C.MODE, mode.toLowerCase()).put(C.NAME, "orb");//war ev3, hab geändert
+        JSONObject o = makeNode(C.GET_SAMPLE).put(C.GET_SAMPLE, C.INFRARED).put(C.PORT, port).put(C.MODE, mode.toLowerCase()).put(C.NAME, "orb");//war ev3, hab geändert
         return app(o);
     }
 
