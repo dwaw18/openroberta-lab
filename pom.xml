@@ -45,6 +45,7 @@
         <module>RobotNXT</module>
         <module>RobotArdu</module>
         <module>RobotNAO</module>
+        <module>RobotPhoton</module>
         <module>RobotMbed</module>
         <module>RobotVorwerk</module>
         <module>RobotWeDo</module>
@@ -109,6 +110,11 @@
             <dependency>
                 <groupId>de.fhg.iais.openroberta</groupId>
                 <artifactId>RobotNAO</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.fhg.iais.openroberta</groupId>
+                <artifactId>RobotPhoton</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

@@ -1,0 +1,5 @@
+<block_set robottype="orb" xmlns="http://de.fhg.iais.roberta.blockly" xmlversion="2.0" description="" tags="">
+    <instance x="42" y="10">
+        <block type="photonBrick_PHOTON-Brick" id="1" intask="true" deletable="false" />
+    </instance>
+</block_set>

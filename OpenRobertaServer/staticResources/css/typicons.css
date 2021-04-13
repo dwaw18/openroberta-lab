@@ -1126,6 +1126,9 @@
 .typcn-adjust-brightness:before {
   content: "\ea6b";
 }
+.typcn-photon:before {
+  content: "PE";
+}
 .typcn-tinkerbots:before {
   content: "\ea6c";
 }
