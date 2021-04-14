@@ -11,15 +11,45 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-define(["require", "exports", "./interpreter.aRobotBehaviour", "./interpreter.constants", "./interpreter.util"], function (require, exports, interpreter_aRobotBehaviour_1, C, U) {
+define(["require", "exports", 'guiState.controller', "./interpreter.aRobotBehaviour", "./interpreter.constants", "./interpreter.util", './socket.io'], function (require, exports, GUISTATE_C, interpreter_aRobotBehaviour_1, C, U, socket) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.RobotPhotonBehaviour = void 0;
     var RobotPhotonBehaviour = /** @class */ (function (_super) {
         __extends(RobotPhotonBehaviour, _super);
-        function RobotPhotonBehaviour(btInterfaceFct, toDisplayFct) {
+        function RobotPhotonBehaviour(appToJsInterface, toDisplayFct) {
             var _this = _super.call(this) || this;
             _this.wedo = {};
+            _this.btInterfaceFct = appToJsInterface;
+            _this.toDisplayFct = toDisplayFct;
+            _this.timers = {};
+            _this.connectedRobot = null;
+
+            _this.io = socket('http://localhost:45867');
+            _this.io.on('connectedRobots', function(connectedRobotsArray) {
+                console.log('[Photon] Connected robots', connectedRobotsArray);
+                if (connectedRobotsArray.length > 0) {
+                  // GUISTATE_C.setState({
+                  //     ['robot.name']: connectedRobotsArray[0].name
+                  // })
+                    _this.connectedRobot = connectedRobotsArray[0].name;
+                    GUISTATE_C.getBlocklyWorkspace().robControls.enable('runOnBrick');
+                }
+            });
+            _this.io.on('robotConnected', function (robotInfo) {
+              console.log('[Photon] Robot connected', robotInfo);
+            });
+            _this.io.on('robotDisconnected', function (robotInfo) {
+              console.log('[Photon] Robot disconnected', robotInfo);
+            });
+
+            _this.io.on('instructionCompleted', function (id, robotName) {
+              console.log('[Photon] Instruction completed. ID:', id, 'Robot name:', robotName);
+            });
+            _this.io.on('sensors', function (receivedSensors, id, robotName) {
+              console.log('[Photon] Received sensors: ', receivedSensors, 'ID:', id, 'robot name:', robotName);
+            })
+
             _this.tiltMode = {
                 UP: '3.0',
                 DOWN: '9.0',
@@ -27,16 +57,14 @@ define(["require", "exports", "./interpreter.aRobotBehaviour", "./interpreter.co
                 FRONT: '7.0',
                 NO: '0.0'
             };
-            _this.btInterfaceFct = btInterfaceFct;
-            _this.toDisplayFct = toDisplayFct;
-            _this.timers = {};
+
             _this.timers['start'] = Date.now();
             U.loggingEnabled(true, true);
             return _this;
         }
         RobotPhotonBehaviour.prototype.update = function (data) {
             U.info('update type:' + data.type + ' state:' + data.state + ' sensor:' + data.sensor + ' actor:' + data.actuator);
-            if (data.target !== "wedo") {
+            if (data.target !== "photon") {
                 return;
             }
             switch (data.type) {
@@ -291,16 +319,24 @@ define(["require", "exports", "./interpreter.aRobotBehaviour", "./interpreter.co
             throw new Error("Method not implemented.");
         };
         RobotPhotonBehaviour.prototype.driveStop = function (_name) {
-            throw new Error("Method not implemented.");
+            // throw new Error("Method not implemented.");
         };
         RobotPhotonBehaviour.prototype.driveAction = function (_name, _direction, _speed, _distance) {
-            throw new Error("Method not implemented.");
+            this.io.emit('instruction', { move: {
+                    direction: _direction == "FOREWARD" ? 0 : 1,
+                    speed: _speed,
+                    distance: _distance
+                } }, 'test', this.connectedRobot);
         };
         RobotPhotonBehaviour.prototype.curveAction = function (_name, _direction, _speedL, _speedR, _distance) {
             throw new Error("Method not implemented.");
         };
         RobotPhotonBehaviour.prototype.turnAction = function (_name, _direction, _speed, _angle) {
-            throw new Error("Method not implemented.");
+            this.io.emit('instruction', { rotate: {
+                direction: _direction == "right" ? 1 : 0,
+                    angle: _angle,
+                    speed: _speed
+                } }, 'test', this.connectedRobot);
         };
         RobotPhotonBehaviour.prototype.showTextActionPosition = function (_text, _x, _y) {
             throw new Error("Method not implemented.");
